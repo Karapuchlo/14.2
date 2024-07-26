@@ -19,10 +19,6 @@ class Category:
         return len(self._products)
 
     @property
-    def products(self):
-        return [f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт." for product in self._products]
-
-    @property
     def category_count(self):
         return Category._category_count
 
