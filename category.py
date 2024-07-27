@@ -2,7 +2,7 @@ class Category:
     def __init__(self, name, description, products=None):
         self.name = name
         self.description = description
-        self._products = []
+        self.__products = []
         if products:
             for product in products:
                 self.add_product(product)
