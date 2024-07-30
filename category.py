@@ -29,3 +29,7 @@ class Product:
     @classmethod
     def new_product(cls, product_data):
         return cls(product_data['name'], product_data['price'], product_data['quantity'])
+
+    def __str__(self):
+        total_products = sum(product.quantity for product in self.products)
+        return f"{self.name}, количество продуктов: {total_products} шт."
