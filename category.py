@@ -1,7 +1,8 @@
 class Category:
-    def __init__(self, name):
+    def __init__(self, name, description, products):
         self.name = name
-        self._products = []
+        self.description = description
+        self._products = products
 
     def add_product(self, product):
         self._products.append(product)
@@ -9,6 +10,11 @@ class Category:
     @property
     def products(self):
         return [f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт." for product in self._products]
+
+    def __str__(self):
+        total_quantity = sum(product.quantity for product in self._products)
+        product_list = "\n".join(self.products)
+        return f"{self.name}, {self.description}, количество продуктов: {total_quantity} шт."
 
 class Product:
     def __init__(self, name, price, quantity):
@@ -29,7 +35,3 @@ class Product:
     @classmethod
     def new_product(cls, product_data):
         return cls(product_data['name'], product_data['price'], product_data['quantity'])
-
-    def __str__(self):
-        total_products = sum(product.quantity for product in self.products)
-        return f"{self.name}, количество продуктов: {total_products} шт."

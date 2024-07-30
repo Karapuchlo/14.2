@@ -4,7 +4,7 @@ class Product:
         self.description = description
         self.price = price
         self.quantity = quantity
-        #self.color = color
+        # self.color = color
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
