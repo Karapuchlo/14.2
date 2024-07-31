@@ -14,3 +14,17 @@ class Product:
             raise TypeError("Can only add Product objects")
         total_value = self.price * self.quantity + other.price * other.quantity
         return total_value
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, new_price):
+        if new_price <= 0:
+            raise ValueError("Цена должна быть больше нуля.")
+        self.__price = new_price
+
+    @classmethod
+    def new_product(cls, product_data):
+        return cls(product_data['name'], product_data['price'], product_data['quantity'])
