@@ -3,8 +3,8 @@ from product import Product
 from category import Category
 
 def test_product_string_representation():
-    product = Product("Apple", 'яблоко', 80, 15)
-    assert str(product) == "Apple, 80 руб. Остаток: 15 шт."
+    product = Product("Apple", 'яблоко', 80, 20)
+    assert str(product) == "Apple, 80 руб. Остаток: 20 шт."
 
 def test_category_string_representation():
     products = [
