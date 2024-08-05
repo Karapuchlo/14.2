@@ -4,6 +4,7 @@ class Product:
         self.description = description
         self.price = price
         self.quantity = quantity
+
         # self.color = color
 
     def __str__(self):
@@ -14,6 +15,7 @@ class Product:
             raise TypeError("Can only add Product objects")
         total_value = self.price * self.quantity + other.price * other.quantity
         return total_value
+
 
     @property
     def price(self):
@@ -27,6 +29,7 @@ class Product:
 
     @classmethod
     def new_product(cls, product_data):
+
         return cls(product_data['name'], product_data['price'], product_data['quantity'])
 
 class Smartphone(Product):
@@ -69,3 +72,9 @@ class LawnGrass(Product):
 
     def __str__(self):
         return f"{self.name}, {self.price:.2f} руб. Остаток: {self.quantity} шт."
+
+        required_keys = ['name', 'price', 'quantity']
+        for key in required_keys:
+            if key not in product_data:
+                raise ValueError(f"Отсутствует обязательный ключ: {key}")
+        return cls(product_data['name'], product_data['description'], product_data['price'], product_data['quantity'])
