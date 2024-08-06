@@ -10,10 +10,14 @@ class Product:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        if not isinstance(other, Product):
+        if type(self) != type(other):
             raise TypeError("Can only add Product objects")
-        total_value = self.price * self.quantity + other.price * other.quantity
-        return total_value
+        return Product(
+            f"{self.name} + {other.name}",
+            f"{self.description}, {other.description}",
+            self.price + other.price,
+            self.quantity + other.quantity
+        )
 
     @property
     def price(self):
@@ -40,19 +44,6 @@ class Smartphone(Product):
     def __str__(self):
         return f"{self.name}, {self.price:.2f} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other):
-        if isinstance(other, Smartphone):
-            new_name = f"{self.name} + {other.name}"
-            new_description = f"{self.description} + {other.description}"
-            new_price = self.price + other.price
-            new_quantity = self.quantity + other.quantity
-            new_screen_size = (self.screen_size + other.screen_size) / 2
-            new_model = f"{self.model} + {other.model}"
-            new_memory = self.memory + other.memory
-            new_color = f"{self.color} + {other.color}"
-            return Smartphone(new_name, new_description, new_price, new_quantity, new_screen_size, new_model, new_memory, new_color)
-        else:
-            return super().__add__(other)
 
     @property
     def efficiency(self):
@@ -68,4 +59,4 @@ class LawnGrass(Product):
         self.color = color
 
     def __str__(self):
-        return f"{self.name}, {self.price:.2f} руб. Остаток: {self.quantity} шт."
+        return f"{self.name}, {self.__price:.2f} руб. Остаток: {self.quantity} шт."
