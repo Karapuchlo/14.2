@@ -12,12 +12,8 @@ class Product:
     def __add__(self, other):
         if type(self) != type(other):
             raise TypeError("Can only add Product objects")
-        return Product(
-            f"{self.name} + {other.name}",
-            f"{self.description}, {other.description}",
-            self.price + other.price,
-            self.quantity + other.quantity
-        )
+        total_value = self.price * self.quantity + other.price * other.quantity
+        return total_value
 
     @property
     def price(self):
@@ -33,6 +29,7 @@ class Product:
     def new_product(cls, product_data):
         return cls(product_data['name'], product_data['price'], product_data['quantity'])
 
+
 class Smartphone(Product):
     def __init__(self, name, description, price, quantity, screen_size, model, memory, color):
         super().__init__(name, description, price, quantity)
@@ -43,7 +40,6 @@ class Smartphone(Product):
 
     def __str__(self):
         return f"{self.name}, {self.price:.2f} руб. Остаток: {self.quantity} шт."
-
 
     @property
     def efficiency(self):
