@@ -19,18 +19,17 @@ def test_product_addition():
     product1 = Product("Apple", 'яблоко', 80, 5)
     product2 = Product("Banana", 'бананы', 50, 10)
     total_value = product1 + product2
-    assert isinstance(total_value, Product)
-    assert total_value.price == 130
-    assert total_value.quantity == 15
+    assert isinstance(total_value, (int, float))
+    assert total_value == 900
 
-def test_smartphone_creation():
-    smartphone = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый")
-    assert smartphone.name == "Samsung Galaxy S23 Ultra"
-    assert smartphone.description == "256GB, Серый цвет, 200MP камера"
-    assert smartphone.price == 180000.0
-    assert smartphone.quantity == 5
-    assert smartphone.model == "S23 Ultra"
-    assert smartphone.color == "Серый"
+
+def test_smartphone_addition():
+    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый")
+    smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
+    smartphone_sum = smartphone1 + smartphone2
+    assert isinstance(smartphone_sum, Product)
+    assert smartphone_sum == pytest.approx(2580000.0)
+
 
 def test_smartphone_str_representation():
     smartphone = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый")
