@@ -4,7 +4,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
-
+        
     @property
     def price(self):
         return self.__price
