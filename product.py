@@ -1,9 +1,12 @@
-class Product:
+from abc import ABC, abstractmethod
+
+class BaseProduct(ABC):
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+        print(f"Создан новый объект продукта: {self.name}")
 
     @property
     def price(self):
@@ -18,3 +21,12 @@ class Product:
     @classmethod
     def new_product(cls, product_data):
         return cls(product_data['name'], product_data['description'], product_data['price'], product_data['quantity'])
+
+    @abstractmethod
+    def apply_discount(self, discount):
+        pass
+
+class Product(BaseProduct):
+    def apply_discount(self, discount):
+        self.price = self.price * (1 - discount)
+
