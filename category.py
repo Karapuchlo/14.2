@@ -18,4 +18,4 @@ class Category:
 
     @property
     def products(self):
-        return [f"{p.name}, {p.price}, {p.quantity}" for p in self._products]
+        return self._products
