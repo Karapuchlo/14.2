@@ -12,7 +12,7 @@ dist/
 .idea/
 
 # Файлы покрытия, кэши и прочие ненужные файлы
-.coverage
+#.coverage
 *.py,cover
 .cache/
 
