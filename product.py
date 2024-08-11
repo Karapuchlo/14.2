@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
+from logging_mixin import LoggingMixin
+
 
 class Representable:
     def __repr__(self):
-        return f"{self.__class__.__name__}('{self.name}', '{self.description}', {self.price}, {self.quantity})"
-class BaseProduct(Representable, ABC):
+        pass
+class BaseProduct(LoggingMixin, Representable, ABC):
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
@@ -33,11 +35,11 @@ class Product(BaseProduct):
     def apply_discount(self, discount):
         self.price = self.price * (1 - discount)
 
-class LawnGrass(BaseProduct):
+class LawnGrass(Product):
     def apply_discount(self, discount):
         self.price = self.price * (1 - discount)
 
-class Smartphone(BaseProduct):
+class Smartphone(Product):
     def apply_discount(self, discount):
         self.price = self.price * (1 - discount)
 
