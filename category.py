@@ -20,5 +20,6 @@ class Category:
 
     def __repr__(self):
         product_reprs = [repr(product) for product in self._products]
-        return f"Category('{self.name}', '{self.description}', {product_reprs})"
+
+        return f"Category('{self.name}', '{self.description}', [{', '.join(product_reprs)}])"
 
