@@ -1,6 +1,7 @@
 class LoggingMixin:
     def __init__(self, *args, **kwargs):
         print(f"Created object of class {self.__class__.__name__} with params: {args}, {kwargs}")
+        print(self.__repr__())
         super().__init__(*args, **kwargs)
 
     def __repr__(self):

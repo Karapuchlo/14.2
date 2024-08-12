@@ -1,5 +1,3 @@
-from product import Product
-
 class Category:
     def __init__(self, name, description, products=None):
         self.name = name
@@ -19,3 +17,8 @@ class Category:
     @property
     def products(self):
         return self._products
+
+    def __repr__(self):
+        product_reprs = [repr(product) for product in self._products]
+        return f"Category('{self.name}', '{self.description}', {product_reprs})"
+
