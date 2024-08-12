@@ -1,0 +1,9 @@
+   [run]
+   source = ./
+   omit =
+       */tests/*
+       */venv/*
+       */site-packages/*
+
+   [html]
+   directory = coverage_report
