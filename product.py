@@ -1,9 +1,17 @@
 from abc import ABC, abstractmethod
 
 class Representable(ABC):
+    @abstractmethod
     def __repr__(self):
+        """Должен возвращать строку"""
         pass
+
 class BaseProduct(Representable, ABC):
+    def __init__(self, name, description, price, quantity):
+        self.name = name
+        self.description = description
+        self.__price = price
+        self.quantity = quantity
 
     @property
     def price(self):
@@ -23,21 +31,15 @@ class BaseProduct(Representable, ABC):
     def apply_discount(self, discount):
         pass
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', '{self.description}', {self.__price}, {self.quantity})"
+
 class Product(BaseProduct):
-    def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
-        self.__price = price
-        self.quantity = quantity
-        print(f"Создан новый объект продукта: {self.name}")
     def apply_discount(self, discount):
-        self.price = self.price * (1 - discount)
+        self.__price = self.__price * (1 - discount)
 
 class LawnGrass(Product):
-    def apply_discount(self, discount):
-        self.price = self.price * (1 - discount)
+    pass
 
 class Smartphone(Product):
-    def apply_discount(self, discount):
-        self.price = self.price * (1 - discount)
-
+    pass
