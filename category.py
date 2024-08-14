@@ -10,6 +10,12 @@ class Category:
     def add_product(self, product):
         self._products.append(product)
 
+    def middle_price(self):
+        if not self.products:
+            return 0
+        total_price = sum(product.price for product in self.products)
+        return total_price / len(self.products)
+
     @property
     def product_count(self):
         return len(self._products)
