@@ -1,9 +1,30 @@
 from abc import ABC, abstractmethod
 
-class Representable(ABC):
-    def __repr__(self):
+class BaseProduct(ABC):
+    @abstractmethod
+    def new_product(self, *args):
         pass
-class BaseProduct(Representable, ABC):
+
+class LoggingMixin:
+    def __init__(self, *args):
+        print(repr(self))
+
+    def __repr__(self):
+        object_attributes = ', '.join(f'{k}: {v}' for k, v in self.__dict__.items())
+        return f"Создан объект со свойствами {object_attributes}"
+
+class Product(BaseProduct, LoggingMixin):
+    """
+    Класс для описания товара в магазине
+    """
+    def __init__(self, name, description, price, quantity):
+        self.name = name
+        self.description = description
+        self.__price = price
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        self.quantity = quantity
+        super().__init__()
 
     @property
     def price(self):
@@ -15,29 +36,21 @@ class BaseProduct(Representable, ABC):
             raise ValueError("Цена должна быть больше нуля.")
         self.__price = new_price
 
+    def apply_discount(self, discount):
+        self.__price = self.__price * (1 - discount)
+
     @classmethod
     def new_product(cls, product_data):
-        return cls(product_data['name'], product_data['description'], product_data['price'], product_data['quantity'])
+        return cls(**product_data)
 
-    @abstractmethod
-    def apply_discount(self, discount):
-        pass
-
-class Product(BaseProduct):
-    def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
-        self.__price = price
-        self.quantity = quantity
-        print(f"Создан новый объект продукта: {self.name}")
-    def apply_discount(self, discount):
-        self.price = self.price * (1 - discount)
 
 class LawnGrass(Product):
-    def apply_discount(self, discount):
-        self.price = self.price * (1 - discount)
+    @classmethod
+    def new_product(cls, product_data):
+        return cls(**product_data)
+
 
 class Smartphone(Product):
-    def apply_discount(self, discount):
-        self.price = self.price * (1 - discount)
-
+    @classmethod
+    def new_product(cls, product_data):
+        return cls(**product_data)

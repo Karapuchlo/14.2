@@ -10,6 +10,12 @@ class Category:
     def add_product(self, product):
         self._products.append(product)
 
+    def middle_price(self):
+        if not self.products:
+            return 0
+        total_price = sum(product.price for product in self.products)
+        return total_price / len(self.products)
+
     @property
     def product_count(self):
         return len(self._products)
@@ -20,5 +26,5 @@ class Category:
 
     def __repr__(self):
         product_reprs = [repr(product) for product in self._products]
-        return f"Category('{self.name}', '{self.description}', {product_reprs})"
+        return f"Category('{self.name}', '{self.description}', [{', '.join(product_reprs)}])"
 

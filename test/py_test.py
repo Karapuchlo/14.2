@@ -31,3 +31,12 @@ def test_set_price():
 
     new_product.price = 0
     assert new_product.price == 0
+
+def test_create_product_with_zero_quantity():
+    with pytest.raises(ValueError) as exc_info:
+        Product("Test Product", "Test Description", 100.0, 0)
+    assert str(exc_info.value) == "Товар с нулевым количеством не может быть добавлен"
+
+def test_average_product_price_with_no_products():
+    category = Category("Test Category", "Test Category")
+    assert category.middle_price() == 0
